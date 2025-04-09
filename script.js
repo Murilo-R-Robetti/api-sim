@@ -37,6 +37,18 @@ app.get('/titulo', function(req, res){
         });
 });
 
+app.get('/veiculos', function(req, res){
+    fetch("https://brasilapi.com.br/api/fipe/marcas/v1/" + "AGRALE")
+        .then((response) => response.json())
+        .then((veiculo) => {
+            res.send(`Veículo: ${veiculo.nome}`);
+        })
+        .catch(error => {
+            console.log("Erro ao acessar o link");
+            res.send("Ops, houve um erro.");
+        });
+});
+
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}...`)
 });
