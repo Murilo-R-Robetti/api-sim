@@ -26,10 +26,10 @@ app.get('/ola', function(req, res){
 });
 
 app.get('/titulo', function(req, res){
-    fetch("https://brasilapi.com.br/api/isbn/v1/{isbn}" + "Akira")
+    fetch("https://brasilapi.com.br/api/isbn/v1/" + "9788545702870")
         .then((response) => response.json())
-        .then((titulo) => {
-            res.send(`Titulo: ${titulo.title}`);
+        .then((cod_isbn) => {
+            res.send(`Isbn: ${cod_isbn.isbn}`);
         })
         .catch(error => {
             console.log("Erro ao acessar o link");
