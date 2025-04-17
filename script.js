@@ -37,14 +37,24 @@ app.get('/titulo', function(req, res){
         });
 });
 
-app.get('/veiculos', function(req, res){
-    fetch("https://brasilapi.com.br/api/fipe/marcas/v1/" + "AGRALE")
+app.get('/fazOPix', function(req, res){
+    fetch("https://brasilapi.com.br/api/pix/v1/participants" )
         .then((response) => response.json())
-        .then((veiculo) => {
-            res.send(`Veículo: ${veiculo.nome}`);
+        .then(data => {
+            let returnObject = null;
+            for(let register of data){
+                console.log(register);
+                if(register['ispb']==='02282709'){
+                    returnObject = register; 
+                }
+            }
+            if (returnObject === null){
+                returnObject = data;
+            }
+            res.send(returnObject);
         })
         .catch(error => {
-            console.log("Erro ao acessar o link");
+            console.log(error);
             res.send("Ops, houve um erro.");
         });
 });
